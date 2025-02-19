@@ -3,6 +3,7 @@
 import dgram from "dgram";
 import { Buffer } from "buffer";
 import { URL } from "url";
+import crypto from 'crypto';
 
 const getPeers = (torrent, callback) => {
   const socket = dgram.createSocket("udp4");
@@ -36,11 +37,25 @@ function respType(res) {
 }
 
 function buildConnReq() {
-  // ...
+  const buf = Buffer.alloc(16);
+
+  // connection id
+  buf.writeUInt32BE(0x417,0);
+  buf.writeUInt32BE(0x27101980,4);
+  // action
+  buf.writeUInt32BE(0,0); 
+  // transaction id
+  crypto.randomBytes(4).copy(buf,12):
+
+  return buf;
 }
 
 function parseConnResp(res) {
-  // ...
+  return {
+    action : res.readUInt32BE(0),
+    transactionId : res.readUInt32BE(4),
+    connectionId : res.slice(8)
+  }
 }
 
 function buildAnnounceReq(connId) {
