@@ -1,7 +1,8 @@
 "use strict";
 
-import getPeers from "./tracker.js";
-import { open } from "./torrentParser.js";
+import getPeers from "./src/tracker.js";
+import { open } from "./src/torrentParser.js";
+import "./src/download.js";
 
 const torrent = open('./testfile.torrent');
 

@@ -5,7 +5,7 @@ import { Buffer } from "buffer";
 import { URL } from "url";
 import crypto from "crypto";
 import genId from "./util.js";
-import { size , infoHash } from "./torrentParser.js";
+import { size , infoHash } from "../src/torrentParser.js";
 
 const getPeers = (torrent, callback) => {
   const socket = dgram.createSocket("udp4");
